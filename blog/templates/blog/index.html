@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="{% static "blog/styles.css" %}" />
+{% endblock css_files %}
+{% block title %}
+{% endblock title %}
+{% block content %}
+    {% include "blog/partials/header.html" %}
+    {% include "blog/partials/footer.html" %}
+{% endblock content %}
