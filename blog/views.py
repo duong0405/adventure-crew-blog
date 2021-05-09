@@ -13,3 +13,7 @@ def posts(request):
 
 def post_detail(request):
     pass
+
+
+def user_profile(request):
+    return render(request, "blog/user_profile.html")
