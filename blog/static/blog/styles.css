@@ -178,3 +178,21 @@ header.masthead .site-heading .h1 {
   }
 }
 
+.widget-list li {
+  display: inline-block;
+}
+.widget-list li a {
+  background-color: rgba(19, 19, 19, 0.05);
+  color: black;
+  text-transform: capitalize;
+  padding: 6px 16px;
+  margin-bottom: 9px;
+  margin-right: 9px;
+  display: block;
+  font-size: 14px;
+  border-radius: 0;
+}
+.widget-list li a:hover {
+  background-color: rgba(61, 234, 164, 0.25);
+}
+

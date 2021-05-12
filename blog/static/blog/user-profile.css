@@ -1,0 +1,111 @@
+ol.list-featured {
+    counter-reset: my-awesome-counter;
+    list-style: none;
+    padding-left: 0; }
+  
+  ol.list-featured li {
+    counter-increment: my-awesome-counter;
+    display: flex;
+    font-size: 0.8rem; }
+  
+  ol.list-featured li:before {
+    content: "0" counter(my-awesome-counter);
+    font-weight: bold;
+    font-size: 3rem;
+    margin-right: 0.5rem;
+    font-family: 'Abril Fatface', serif;
+    line-height: 1; }
+
+.card {
+    border: 0;
+    position: relative;
+  }
+
+.article-card {
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-img {
+    height: 200px;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  
+  .card-image {
+    position: relative;
+  }
+  .card-image img {
+    border-radius: 0;
+  }
+  .card-image .post-info {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .card-image .post-info span {
+    display: inline-block;
+    line-height: 1.3;
+    font-size: 12px;
+    padding: 3px 8px;
+    padding-top: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    color: #fff;
+    border-radius: 0;
+    margin-top: 5px;
+  }
+  .post-meta {
+    padding-left: 0;
+  }
+  .post-meta li {
+    list-style-type: none;
+    display: inline-block;
+    color: #888;
+    font-weight: 500;
+  }
+  .post-meta li a {
+    display: inline-block;
+    background-color: rgba(19, 19, 19, 0.05);
+    color: black;
+    text-transform: capitalize;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+    margin-right: 2px;
+    font-size: 14px;
+    border-radius: 0;
+  }
+ 
+  .post-meta li svg {
+    display: inline-block;
+  }
+
+  .post-title {
+    color: #000;
+    display: inline;
+    text-decoration: none;
+  }
+
+  .widget-list li {
+    display: inline-block;
+  }
+  .widget-list li a {
+    background-color: rgba(19, 19, 19, 0.05);
+    color: black;
+    text-transform: capitalize;
+    padding: 6px 16px;
+    margin-bottom: 9px;
+    margin-right: 9px;
+    display: block;
+    font-size: 14px;
+    border-radius: 0;
+  }
+  .widget-list li a:hover {
+    background-color: rgba(61, 234, 164, 0.25);
+  }
