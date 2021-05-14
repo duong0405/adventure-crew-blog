@@ -53,68 +53,69 @@
                     </div>
                 </div>
             </div>
-        </header>
-        <main class="container pt-3" role="main">
-            <div class="row">
-                <div class="col-md-8 blog-main">
-                    <h3 class="pb-3 mb-4 font-italic border-bottom">Lastest Articles</h3>
-                    <div class="row">
-                        <div class="col-12 mb-4">{% include "blog/partials/userpost1.html" %}</div>
-                        <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                        <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                        <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                        <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                    </div>
-                    <!-- /.blog-post -->
-                    <nav class="blog-pagination">
-                        <a class="btn btn-outline-primary" href="#">Older</a>
-                        <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-                    </nav>
+        </div>
+    </header>
+    <main class="container pt-3" role="main">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">Lastest Articles</h3>
+                <div class="row">
+                    <div class="col-12 mb-4">{% include "blog/partials/userpost1.html" %}</div>
+                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
+                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
+                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
+                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
                 </div>
-                <!-- /.blog-main -->
-                <aside class="col-md-4 blog-sidebar">
-                    <div class="p-3 mb-3 bg-light rounded">
-                        <h4 class="font-italic">Categories</h4>
-                        <ul class="widget-list">
-                            <li>
-                                <a href="#!">computer<span class="ml-auto">(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">cruises<span class="ml-auto">(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">destination<span class="ml-auto">(1)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">internet<span class="ml-auto">(4)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">lifestyle<span class="ml-auto">(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">news<span class="ml-auto">(5)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">telephone<span class="ml-auto">(1)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">tips<span class="ml-auto">(1)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">travel<span class="ml-auto">(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">website<span class="ml-auto">(4)</span></a>
-                            </li>
-                            <li>
-                                <a href="#!">hugo<span class="ml-auto">(2)</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-                <!-- /.blog-sidebar -->
+                <!-- /.blog-post -->
+                <nav class="blog-pagination pb-5">
+                    <a class="btn btn-outline-primary" href="#">Older</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+                </nav>
             </div>
-            <!-- /.row -->
-        </main>
-        {% include "blog/partials/footer.html" %}
-    {% endblock content %}
+            <!-- /.blog-main -->
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-3 mb-3 bg-light rounded">
+                    <h4 class="font-italic">Categories</h4>
+                    <ul class="widget-list">
+                        <li>
+                            <a href="#!">computer<span class="ml-auto">(3)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">cruises<span class="ml-auto">(2)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">destination<span class="ml-auto">(1)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">internet<span class="ml-auto">(4)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">lifestyle<span class="ml-auto">(2)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">news<span class="ml-auto">(5)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">telephone<span class="ml-auto">(1)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">tips<span class="ml-auto">(1)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">travel<span class="ml-auto">(3)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">website<span class="ml-auto">(4)</span></a>
+                        </li>
+                        <li>
+                            <a href="#!">hugo<span class="ml-auto">(2)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- /.blog-sidebar -->
+        </div>
+        <!-- /.row -->
+    </main>
+    {% include "blog/partials/footer.html" %}
+{% endblock content %}
