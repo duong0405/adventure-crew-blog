@@ -75,9 +75,9 @@
         <div class="row">
             <div class="col-md-8 blog-main">
                 <h3 class="pb-3 mb-4 font-italic border-bottom">Most recent posts</h3>
-                {% include "blog/partials/post_preview1.html" %}
-                {% include "blog/partials/post_preview2.html" %}
-                {% include "blog/partials/post_preview3.html" %}
+                {% for post in posts  %}
+                    {% include "blog/partials/post_preview.html" %}
+                {% endfor %}
                 <!-- /.blog-post -->
                 <nav class="blog-pagination pb-5">
                     <a class="btn btn-outline-primary" href="#">Older</a>
