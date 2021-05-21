@@ -2,7 +2,8 @@ from datetime import datetime
 
 all_posts = [
     {
-        "title": "15 Bests Things To Do In Hanoi Vietnam",
+        "slug": "mountain-hiking-how-to",
+        "title": "How To Hide in the Moutains",
         "date": datetime(2021, 1, 1, 10, 4),
         "dateformat": "",
         "author": "Danny",
@@ -30,6 +31,7 @@ all_posts = [
         "details": ""
     },
     {
+        "slug": "new-destination",
         "title": "New destination",
         "date": datetime(2021, 2, 1, 5, 15),
         "dateformat": "",
@@ -63,6 +65,7 @@ all_posts = [
         "details": ""
     },
     {
+        "slug": "travel-tips",
         "title": "Travel Tips",
         "date": datetime(2021, 2, 15, 10, 15),
         "dateformat": "",

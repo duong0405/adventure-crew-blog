@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from . import posts
+from . import userposts
 
 # Create your views here.
 
@@ -24,7 +25,12 @@ def starting_page(request):
 
 
 def post_detail(request, slug):
-    return render(request, "blog/post_detail.html")
+    identified_post = next(
+        post for post in userposts.all_posts if post['slug'] == slug)
+
+    return render(request, "blog/post_detail.html", {
+        "post": identified_post
+    })
 
 
 def user_profile(request):

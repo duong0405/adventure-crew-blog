@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{% static "blog/styles.css" %}" />
 {% endblock css_files %}
 {% block title %}
+    {{ post.title }}
 {% endblock title %}
 {% block content %}
     {% include "blog/partials/navbar.html" %}
@@ -61,16 +62,11 @@
                         <p class="text-uppercase font-weight-bold">
                             <a class="text-danger" href="./category.html">Stories</a>
                         </p>
-                        <h1 class="display-4 secondfont mb-3 font-weight-bold">
-                            Sterling could jump 8% if Brexit deal gets approved by UK Parliament
-                        </h1>
-                        <p class="mb-3">
-                            Analysts told CNBC that the currency could hit anywhere between
-                            $1.35-$1.40 if the deal gets passed through the U.K. parliament.
-                        </p>
+                        <h1 class="display-4 secondfont mb-3 font-weight-bold">{{ post.title }}</h1>
+                        <p class="mb-3">{{ post.subtitle }}</p>
                         <div class="d-flex align-items-center">
-                            <small class="ml-5 mr-5">Posted by Danny McLoan
-                            <span class="text-muted d-block">A few hours ago &middot; 5 min. read</span
+                            <small class="ml-5 mr-5">Posted by {{ post.author }}
+                            <span class="text-muted d-block">{{ post.date|date:"F d, Y" }} &middot; 5 min. read</span
                             >
                         </small>
                     </div>
@@ -79,7 +75,7 @@
                     <img style="margin: 0px 75px"
                          width="500"
                          height="700"
-                         src="https://wowthemesnet.github.io/template-mundana-bootstrap-html/assets/img/demo/intro.jpg"/>
+                         src="{% static "blog/assets/img/"|add:post.img1 %}"/>
                 </div>
             </div>
         </div>
@@ -105,55 +101,25 @@
         </div>
         <div class="col-md-12 col-lg-8">
             <section>
-                <h2 class="pb-3">A Loving Heart is the Truest Wisdom</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis,
-                    eius mollitia suscipit, quisquam doloremque distinctio perferendis et
-                    doloribus unde architecto optio laboriosam porro adipisci sapiente
-                    officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore
-                    perferendis, enim praesentium omnis, iste doloremque quia officia
-                    optio deserunt molestiae voluptates soluta architecto tempora.
-                </p>
-                <p>
-                    Molestiae cupiditate inventore animi, maxime sapiente optio, illo est
-                    nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni
-                    reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam
-                    incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore
-                    amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut
-                    ea, repudiandae suscipit!
-                </p>
+                <h2 class="pb-3">{{ post.heading1 }}</h2>
+                <p>{{ post.content1|linebreaks }}</p>
                 <div>
                     <img style="max-width: 100%; max-height: 100%"
-                         src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2448,h=992,fit=crop/kodahki7nt/dave-herring-unsplash-dWxP7xnq12HzwlEO.jpg"/>
+                         src="{% static "blog/assets/img/"|add:post.img2 %}"/>
                 </div>
-                <h3 class="pt-5 pb-5">
-                    It's believed that the pony-sized Icelandic Horse was introduced to
-                    this island by Viking Age Scandinavians back in the 9th century.
-                </h3>
-                <p>
-                    Temporibus ad error suscipit exercitationem hic molestiae totam
-                    obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora
-                    maiores ex architecto voluptatum aut officia doloremque. Error dolore
-                    voluptas, omnis molestias odio dignissimos culpa ex earum nisi
-                    consequatur quos odit quasi repellat qui officiis reiciendis incidunt
-                    hic non? Debitis commodi aut, adipisci.
-                </p>
+                <h3 class="pt-5 pb-5">{{ post.heading2 }}</h3>
+                <p>{{ post.content2 }}</p>
                 <div class="row pt-5 pb-5">
                     <div class="col-md-6">
                         <img style="max-width: 100%; max-height: 100%"
-                             src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=712,fit=crop/kodahki7nt/redcharlie-unsplash-YBgq09NrQJfQw6xG.jpg"/>
+                             src="{% static "blog/assets/img/"|add:post.img3 %}"/>
                     </div>
                     <div class="col-md-6">
                         <img style="max-width: 100%; max-height: 100%"
-                             src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=712,fit=crop/kodahki7nt/jeremy-bishop-unsplash-AoP0Mg9glWH2MVQK.jpg"/>
+                             src="{% static "blog/assets/img/"|add:post.img4 %}"/>
                     </div>
                 </div>
-                <p>
-                    Freemium non-disclosure agreement lean startup bootstrapping holy
-                    grail ramen MVP iteration accelerator. Strategy market ramen leverage
-                    paradigm shift seed round entrepreneur crowdfunding social proof angel
-                    investor partner network virality.
-                </p>
+                <p>{{ post.content3 }}</p>
             </section>
             <div class="pt-5">
                 <div class="section-title">
@@ -168,7 +134,9 @@
                                      width="70">
                                 <div>
                                     <h5 style="padding: 0 15px;">Mike</h5>
-                                    <div class="text-muted d-block" style="padding: 0 15px;">January 9, 2018 at 2:21pm</div>
+                                    <div class="text-muted d-block" style="padding: 0 15px;">
+                                        January 9, 2018 at 2:21pm
+                                    </div>
                                 </div>
                             </div>
                             <p class="pt-3">
@@ -189,8 +157,12 @@
                                      src="https://cdn-icons-png.flaticon.com/512/168/168732.png"
                                      width="70">
                                 <div>
-                                    <h5 style="padding: 0 15px;">Andrew</h5>
-                                    <div class="text-muted d-block" style="padding: 0 15px;">January 9, 2018 at 2:21pm</div>
+                                    <h5 style="padding: 0 15px;">
+                                        Andrew
+                                    </h5>
+                                    <div class="text-muted d-block" style="padding: 0 15px;">
+                                        January 9, 2018 at 2:21pm
+                                    </div>
                                 </div>
                             </div>
                             <p class="pt-3">

@@ -1,6 +1,6 @@
 <section class="pb-5">
   <h2>
-    <a href="" class="text-dark">{{ post.title }}</a>
+    <a href="{% url "post-detail-page" post.slug %}" class="text-dark">{{ post.title }}</a>
   </h2>
   <p>{{post.dateformat}} by <a href="">{{post.author}}</a></p>
   <div>{{ post.preview | safe }}</div>
