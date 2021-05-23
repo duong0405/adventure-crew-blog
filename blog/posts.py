@@ -5,7 +5,6 @@ all_posts = [
         "slug": "mountain-hiking-how-to",
         "title": "How To Hide in the Moutains",
         "date": datetime(2021, 1, 1, 10, 4),
-        "dateformat": "",
         "author": "Danny McLoan",
         "preview": """ 
             <p>
@@ -34,7 +33,6 @@ all_posts = [
         "slug": "transformation-amidst-emotional-challenge",
         "title": "Your practice, your story – Transformation amidst emotional challenge",
         "date": datetime(2021, 2, 1, 5, 15),
-        "dateformat": "",
         "author": "Emily",
         "preview": """ 
             <p>
@@ -68,7 +66,6 @@ all_posts = [
         "slug": "things-to-do-in-hanoi",
         "title": "AMAZING THINGS TO DO IN HANOI, VIETNAM",
         "date": datetime(2021, 2, 15, 10, 15),
-        "dateformat": "",
         "author": "Chris",
         "preview": """ 
             <p>

@@ -17,9 +17,6 @@ def starting_page(request):
     sorted_posts = sorted(posts.all_posts, key=get_date)
     lastest_posts = sorted_posts[-3:]
 
-    for post in lastest_posts:
-        post['dateformat'] = post['date'].strftime('%B %d, %Y')
-
     return render(request, "blog/index.html", {
         "posts": lastest_posts
     })

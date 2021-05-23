@@ -2,6 +2,6 @@
   <h2>
     <a href="{% url "post-detail-page" post.slug %}" class="text-dark">{{ post.title }}</a>
   </h2>
-  <p>{{post.dateformat}} by <a href="">{{post.author}}</a></p>
+  <p>{{ post.date|date:"F d, Y" }} by <a href="">{{post.author}}</a></p>
   <div>{{ post.preview | safe }}</div>
 </section>
