@@ -11,14 +11,28 @@ def get_date(post):
     return post["date"]
 
 
+def get_rate(post):
+    return post['rate']
+
+
 def starting_page(request):
 
     # Render 3 latest posts on starting page
     sorted_posts = sorted(posts.all_posts, key=get_date)
     lastest_posts = sorted_posts[-3:]
 
+    # Render 2 rating posts on starting page
+    sorted_rating_posts = sorted(posts.all_posts, key=get_rate)
+    rating_posts = []
+
+    for post in sorted_rating_posts[-2:]:
+        for user_post in userposts.all_posts:
+            if user_post['slug'] == post['slug']:
+                rating_posts.append(user_post)
+
     return render(request, "blog/index.html", {
-        "posts": lastest_posts
+        "posts": lastest_posts,
+        "rating": rating_posts
     })
 
 

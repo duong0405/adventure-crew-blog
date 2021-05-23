@@ -27,7 +27,7 @@ all_posts = [
                 consectetur.
             </p>
         """,
-        "details": ""
+        "rate": "80"
     },
     {
         "slug": "transformation-amidst-emotional-challenge",
@@ -60,7 +60,7 @@ all_posts = [
                 eros.
             </p>
         """,
-        "details": ""
+        "rate": "85"
     },
     {
         "slug": "things-to-do-in-hanoi",
@@ -89,6 +89,6 @@ all_posts = [
                 a pharetra augue.
             </p>
         """,
-        "details": ""
+        "rate": "70"
     }
 ]

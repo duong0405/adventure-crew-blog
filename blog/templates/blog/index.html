@@ -29,20 +29,17 @@
                         <div class="card-body d-flex flex-column align-items-start">
                             <strong class="d-inline-block mb-2 text-primary">Featured</strong>
                             <h3 class="mb-0">
-                                <a class="text-dark" href="#">Featured post</a>
+                                <a class="text-dark" href="{% url "post-detail-page" rating.1.slug %}">{{ rating.1.title|truncatewords:4 }}</a>
                             </h3>
-                            <div class="mb-1 text-muted">Nov 12</div>
-                            <p class="card-text mb-auto">
-                                This is a wider card with supporting text below as a natural lead-in
-                                to additional content.
-                            </p>
-                            <a href="#">Continue reading</a>
+                            <div class="mb-1 text-muted">{{ rating.1.date|date:"M j" }}</div>
+                            <p class="card-text mb-auto">{{ rating.1.subtitle | truncatewords:25 }}</p>
+                            <a href="{% url "post-detail-page" rating.1.slug %}">Continue reading</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-md-block"
                              data-src="holder.js/200x250?theme=thumb"
                              alt="Thumbnail [200x250]"
                              style="width: 200px; height: 250px"
-                             src="{% static "blog/images/feature_post.jpg" %}"
+                             src="{% static "blog/images/"|add:rating.1.img1 %}"
                              data-holder-rendered="true"/>
                     </div>
                 </div>
@@ -51,20 +48,17 @@
                         <div class="card-body d-flex flex-column align-items-start">
                             <strong class="d-inline-block mb-2 text-success">Hostest</strong>
                             <h3 class="mb-0">
-                                <a class="text-dark" href="#">Post title</a>
+                                <a class="text-dark" href="{% url "post-detail-page" rating.0.slug %}">{{ rating.0.title|truncatewords:6 }}</a>
                             </h3>
-                            <div class="mb-1 text-muted">Nov 11</div>
-                            <p class="card-text mb-auto">
-                                This is a wider card with supporting text below as a natural lead-in
-                                to additional content.
-                            </p>
-                            <a href="#">Continue reading</a>
+                            <div class="mb-1 text-muted">{{ rating.0.date|date:"M j" }}</div>
+                            <p class="card-text mb-auto">{{ rating.0.subtitle | truncatewords:25 }}</p>
+                            <a href="{% url "post-detail-page" rating.0.slug %}">Continue reading</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-md-block"
                              data-src="holder.js/200x250?theme=thumb"
                              alt="Thumbnail [200x250]"
                              style="width: 200px; height: 250px"
-                             src="{% static "blog/images/title_post.jpg" %}"
+                             src="{% static "blog/images/"|add:rating.0.img1 %}"
                              data-holder-rendered="true"/>
                     </div>
                 </div>
