@@ -6,7 +6,7 @@ all_posts = [
         "title": "How To Hide in the Moutains",
         "date": datetime(2021, 1, 1, 10, 4),
         "dateformat": "",
-        "author": "Danny",
+        "author": "Danny McLoan",
         "preview": """ 
             <p>
                 Cum sociis natoque penatibus et magnis
@@ -31,11 +31,11 @@ all_posts = [
         "details": ""
     },
     {
-        "slug": "new-destination",
-        "title": "New destination",
+        "slug": "transformation-amidst-emotional-challenge",
+        "title": "Your practice, your story – Transformation amidst emotional challenge",
         "date": datetime(2021, 2, 1, 5, 15),
         "dateformat": "",
-        "author": "Jacob",
+        "author": "Emily",
         "preview": """ 
             <p>
                 Cum sociis natoque penatibus et magnis
@@ -65,8 +65,8 @@ all_posts = [
         "details": ""
     },
     {
-        "slug": "travel-tips",
-        "title": "Travel Tips",
+        "slug": "things-to-do-in-hanoi",
+        "title": "AMAZING THINGS TO DO IN HANOI, VIETNAM",
         "date": datetime(2021, 2, 15, 10, 15),
         "dateformat": "",
         "author": "Chris",

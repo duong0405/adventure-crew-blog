@@ -2,6 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 from . import posts
 from . import userposts
+from . import users
 
 # Create your views here.
 
@@ -28,8 +29,13 @@ def post_detail(request, slug):
     identified_post = next(
         post for post in userposts.all_posts if post['slug'] == slug)
 
+    for user in users.users:
+        if (user['name'] == identified_post['author']):
+            identified_user = user
+
     return render(request, "blog/post_detail.html", {
-        "post": identified_post
+        "post": identified_post,
+        "user": identified_user
     })
 
 

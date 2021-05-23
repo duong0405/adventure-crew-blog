@@ -1,0 +1,15 @@
+{% load static %}
+<header style="background: #f4f4f4">
+    <div class="container align-items-center" style="padding: 3% 5%;">
+        <p class="text-uppercase font-weight-bold ">
+            <a class="text-danger">Stories</a>
+        </p>
+        <h1 class="display-4 secondfont mb-3 font-weight-bold">{{ post.title }}</h1>
+        <p class="mb-3">{{ post.subtitle }}</p>
+        <div class="d-flex align-items-center">
+            <small class="ml-5 mr-5">Posted by {{ post.author }}
+                <span class="text-muted d-block">{{ post.date|date:"F d, Y" }} &middot; 5 min. read</span>
+            </small>
+        </div>
+    </div>
+</header>

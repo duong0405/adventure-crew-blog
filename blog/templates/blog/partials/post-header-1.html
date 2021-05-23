@@ -1,0 +1,29 @@
+{% load static %}
+<header style="background: #f4f4f4">
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid mb-3 mr-5 pl-5 pt-3 pb-5 position-relative">
+            <div class="h-100 tofront">
+                <div class="row">
+                    <div class="col-md-6 pt-6 pb-6 pr-6 align-self-center">
+                        <p class="text-uppercase font-weight-bold">
+                            <a class="text-danger" href="./category.html">Stories</a>
+                        </p>
+                        <h1 class="display-4 secondfont mb-3 font-weight-bold">{{ post.title }}</h1>
+                        <p class="mb-3">{{ post.subtitle }}</p>
+                        <div class="d-flex align-items-center">
+                            <small class="ml-5 mr-5">Posted by {{ post.author }}
+                            <span class="text-muted d-block">{{ post.date|date:"F d, Y" }} &middot; 5 min. read</span
+                            >
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img style="margin: 0px 75px"
+                         width="500"
+                         height="700"
+                         src="{% static "blog/images/"|add:post.img1 %}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
