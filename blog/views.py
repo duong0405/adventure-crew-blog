@@ -30,9 +30,15 @@ def starting_page(request):
             if user_post['slug'] == post['slug']:
                 rating_posts.append(user_post)
 
+    # Render tags
+    tags = []
+    for post in lastest_posts:
+        tags += post['tags']
+
     return render(request, "blog/index.html", {
         "posts": lastest_posts,
-        "rating": rating_posts
+        "rating": rating_posts,
+        "tags": tags
     })
 
 

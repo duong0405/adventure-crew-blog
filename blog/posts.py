@@ -27,7 +27,8 @@ all_posts = [
                 consectetur.
             </p>
         """,
-        "rate": "80"
+        "rate": "80",
+        "tags": ["Tips", "hiking", ]
     },
     {
         "slug": "transformation-amidst-emotional-challenge",
@@ -60,7 +61,8 @@ all_posts = [
                 eros.
             </p>
         """,
-        "rate": "85"
+        "rate": "85",
+        "tags": ["Lifestyle"]
     },
     {
         "slug": "things-to-do-in-hanoi",
@@ -89,6 +91,7 @@ all_posts = [
                 a pharetra augue.
             </p>
         """,
-        "rate": "70"
+        "rate": "70",
+        "tags": ["hanoi", "Travel", "Vietnam"]
     }
 ]
