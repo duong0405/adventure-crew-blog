@@ -56,5 +56,10 @@ def post_detail(request, slug):
     })
 
 
-def user_profile(request):
-    return render(request, "blog/user_profile.html")
+def user_profile(request, username):
+    for user in users.users:
+        if user['name'] == username:
+            identified_user = user
+    return render(request, "blog/user_profile.html", {
+        "user": identified_user
+    })
