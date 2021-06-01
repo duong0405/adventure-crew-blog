@@ -63,3 +63,7 @@ def user_profile(request, username):
     return render(request, "blog/user_profile.html", {
         "user": identified_user
     })
+
+
+def login(request):
+    return render(request, "blog/login.html")
