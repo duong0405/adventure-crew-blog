@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import UserProfile
+from .models import UserProfile, Tag, Content, Post
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_filter = ("author", "tags", "date")
+    list_display = ("title", "date", "author")
+    prepopulated_fields = {"slug": ("title",)}
+
 
 # Register your models here.
 admin.site.register(UserProfile)
+admin.site.register(Tag)
+admin.site.register(Content)
+admin.site.register(Post, PostAdmin)
