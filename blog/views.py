@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, get_user_model
 from datetime import datetime
-from . import posts
-from . import userposts
-from . import users
 from .form import UserRegistrationForm
 from django.contrib import messages
+from .models import Post, Content, Tag
+from .dummy_preview import dummy_preview
+import random
 
 # Create your views here.
 
@@ -21,26 +21,20 @@ def get_rate(post):
 def starting_page(request):
 
     # Render 3 latest posts on starting page
-    sorted_posts = sorted(posts.all_posts, key=get_date)
-    lastest_posts = sorted_posts[-3:]
+    lastest_posts = Post.objects.all().order_by("-date")[:3]
+
+    preview_contents = random.choices(dummy_preview, k=3)
 
     # Render 2 rating posts on starting page
-    sorted_rating_posts = sorted(posts.all_posts, key=get_rate)
-    rating_posts = []
-
-    for post in sorted_rating_posts[-2:]:
-        for user_post in userposts.all_posts:
-            if user_post['slug'] == post['slug']:
-                rating_posts.append(user_post)
+    rating_posts = Post.objects.all().order_by("-rating")[:2]
 
     # Render tags
     tags = []
-    for post in lastest_posts:
-        tags += post['tags']
 
     return render(request, "blog/index.html", {
         "posts": lastest_posts,
         "rating": rating_posts,
+        "preview_contents": preview_contents,
         "tags": tags
     })
 

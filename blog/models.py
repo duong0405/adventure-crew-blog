@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -58,10 +58,14 @@ class Post(models.Model):
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, db_index=True)
     post_format = models.IntegerField(choices=Format.choices)
+    post_preview = models.TextField(MinLengthValidator(
+        10), blank=False, null=True, default=None)
     content = models.OneToOneField(Content, on_delete=models.CASCADE)
     author = models.ForeignKey(
         UserProfile, null=True, on_delete=models.SET_NULL, related_name="posts")
     tags = models.ManyToManyField(Tag)
+    rating = models.FloatField(null=True, blank=True, default=None, validators=[
+                               MinValueValidator(0.0), MaxValueValidator(10.0)])
 
     def __str__(self):
         return self.title
