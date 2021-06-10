@@ -16,9 +16,10 @@ class UserProfile(models.Model):
     rating = models.FloatField()
 
     def full_name(self):
-        if not self.user.first_name and not self.user.last_name:
-            return f"{self.user.first_name} { self.user.last_name}"
-        return self.user.username
+        if self.user.first_name == "" or self.user.last_name == "":
+            return self.user.username
+        else:
+            return f"{self.user.first_name} {self.user.last_name}"
 
     def __str__(self):
         return self.full_name()
