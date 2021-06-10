@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 
     def full_name(self):
         if not self.user.first_name and not self.user.last_name:
-            return f"{self.user.first_name} {self.user.last_name}"
+            return f"{self.user.first_name} { self.user.last_name}"
         return self.user.username
 
     def __str__(self):

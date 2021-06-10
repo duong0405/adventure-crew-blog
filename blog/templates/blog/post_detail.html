@@ -9,7 +9,7 @@
 {% block content %}
     {% include "blog/partials/navbar.html" %}
     {% include "blog/partials/card.html" %}
-    {% if post.format == "1" %}
+    {% if post.post_format == 1 %}
         {% include "blog/partials/post-header-1.html" %}
     {% else %}
         {% include "blog/partials/post-header-2.html" %}
@@ -34,12 +34,10 @@
             </div>
             <div class="col-md-12 col-lg-8">
                 <section>
-                    {% if post.format == "1" %}
+                    {% if post.post_format == 1 %}
                         {% include "blog/partials/post-format-1.html" %}
-                    {% elif post.format == "2" %}
-                        {% include "blog/partials/post-format-2.html" %}
                     {% else %}
-                        {% include "blog/partials/post-format-3.html" %}
+                        {% include "blog/partials/post-format-2.html" %}
                     {% endif %}
                 </section>
                 <div class="pt-5">

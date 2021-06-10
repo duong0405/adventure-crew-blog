@@ -1,20 +1,20 @@
 {% load static %}
-<h2 class="pb-3">{{ post.heading1 }}</h2>
-<p>{{ post.content1|linebreaks }}</p>
+<h2 class="pb-3">{{ post.content.heading1 }}</h2>
+<p>{{ post.content.paragraph1|linebreaks }}</p>
 <div>
-    <img class="img-fluid w-100"
-         src="{% static "blog/images/"|add:post.img2 %}"/>
+  <img class="img-fluid w-100"
+       src="{% static "blog/images/"|add:post.content.img2 %}"/>
 </div>
-<h3 class="pt-5 pb-5">{{ post.heading2 }}</h3>
-<p>{{ post.content2 }}</p>
+<h3 class="pt-5 pb-5">{{ post.content.heading2 }}</h3>
+<p>{{ post.content.paragraph2 }}</p>
 <div class="row pt-5 pb-5">
-    <div class="col-md-6">
-        <img style="max-width: 100%; max-height: 100%"
-             src="{% static "blog/images/"|add:post.img3 %}"/>
-    </div>
-    <div class="col-md-6">
-        <img style="max-width: 100%; max-height: 100%"
-             src="{% static "blog/images/"|add:post.img4 %}"/>
-    </div>
+  <div class="col-md-6">
+    <img style="max-width: 100%; max-height: 100%"
+         src="{% static "blog/images/"|add:post.content.img3 %}"/>
+  </div>
+  <div class="col-md-6">
+    <img style="max-width: 100%; max-height: 100%"
+         src="{% static "blog/images/"|add:post.content.img4 %}"/>
+  </div>
 </div>
-<p>{{ post.content3 }}</p>
+<p>{{ post.content.paragraph3 }}</p>

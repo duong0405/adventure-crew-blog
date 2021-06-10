@@ -1,29 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, get_user_model
-from datetime import datetime
+
 from .form import UserRegistrationForm
 from django.contrib import messages
-from .models import Post, Content, Tag
-from .dummy_preview import dummy_preview
-import random
+from .models import Post
 
 # Create your views here.
-
-
-def get_date(post):
-    return post["date"]
-
-
-def get_rate(post):
-    return post['rate']
 
 
 def starting_page(request):
 
     # Render 3 latest posts on starting page
     lastest_posts = Post.objects.all().order_by("-date")[:3]
-
-    preview_contents = random.choices(dummy_preview, k=3)
 
     # Render 2 rating posts on starting page
     rating_posts = Post.objects.all().order_by("-rating")[:2]
@@ -34,22 +22,16 @@ def starting_page(request):
     return render(request, "blog/index.html", {
         "posts": lastest_posts,
         "rating": rating_posts,
-        "preview_contents": preview_contents,
         "tags": tags
     })
 
 
 def post_detail(request, slug):
-    identified_post = next(
-        post for post in userposts.all_posts if post['slug'] == slug)
-
-    for user in users.users:
-        if (user['name'] == identified_post['author']):
-            identified_user = user
-
+    identified_post = get_object_or_404(Post, slug=slug)
+    author = identified_post.author
     return render(request, "blog/post_detail.html", {
         "post": identified_post,
-        "user": identified_user
+        "user": author
     })
 
 

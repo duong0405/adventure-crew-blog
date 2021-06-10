@@ -2,15 +2,18 @@
 <h3 class="pt-2 pb-5">{{ post.heading1 }}</h3>
 <p>{{ post.content1 }}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static "blog/images/"|add:post.img1 %}"/>
+  <img class="img-fluid w-100" src="{% static
+  "blog/images/"|add:post.content.img1 %}"/>
 </div>
 <h3 class="pt-2 pb-5">{{ post.heading2 }}</h3>
 <p>{{ post.content2 }}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static "blog/images/"|add:post.img2 %}"/>
+  <img class="img-fluid w-100" src="{% static
+  "blog/images/"|add:post.content.img2 %}"/>
 </div>
 <h3 class="pt-5 pb-5">{{ post.heading3 }}</h3>
 <p>{{ post.content3 }}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static "blog/images/"|add:post.img3 %}"/>
+  <img class="img-fluid w-100" src="{% static
+  "blog/images/"|add:post.content.img3 %}"/>
 </div>
