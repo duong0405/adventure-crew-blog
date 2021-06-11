@@ -3,7 +3,7 @@ from django.contrib.auth import login, get_user_model
 
 from .form import UserRegistrationForm
 from django.contrib import messages
-from .models import Post
+from .models import Post, UserProfile
 
 # Create your views here.
 
@@ -38,9 +38,11 @@ def post_detail(request, slug):
 
 
 def user_profile(request, username):
-    for user in users.users:
-        if user['name'] == username:
+    users = UserProfile.objects.all()
+    for user in users:
+        if user.__str__() == username:
             identified_user = user
+
     return render(request, "blog/user_profile.html", {
         "user": identified_user
     })
