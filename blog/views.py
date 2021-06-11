@@ -18,6 +18,8 @@ def starting_page(request):
 
     # Render tags
     tags = []
+    for post in lastest_posts:
+        tags += post.tags.all()
 
     return render(request, "blog/index.html", {
         "posts": lastest_posts,
