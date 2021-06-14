@@ -21,6 +21,9 @@
                                     </p>
                                     <form class="mx-1 mx-md-4" method="POST">
                                         {% csrf_token %}
+                                        {% if errors %}
+                                            {% for error in errors %}<p>{{ error }}</p>{% endfor %}
+                                        {% endif %}
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
@@ -58,7 +61,7 @@
                                             </div>
                                         </div>
                                         <div class="form-check d-flex justify-content-center mb-5">
-                                            <input class="form-check-input me-2" type="checkbox" value="" />
+                                            <input class="form-check-input me-2" type="checkbox" value="" required />
                                             <label class="form-check-label small text-muted">
                                                 I agree all statements in <a class=" text-muted"href="#!">Terms of service</a>
                                             </label>

@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, get_user_model
 
 from .form import UserRegistrationForm
-from django.contrib import messages
 from .models import Post, UserProfile
 
 # Create your views here.
@@ -53,23 +52,13 @@ def user_login(request):
 
 
 def user_register(request):
-    username = request.POST.get("username")
-    email = request.POST.get("email")
-    pw1 = request.POST.get("password1")
-    pw2 = request.POST.get("password2")
-    print(username, email, pw1, pw2)
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Registration successful.")
             return redirect("/")
-        else:
-            for error in list(form.errors.values()):
-                messages.error(
-                    request, "Unsuccessful registration. Invalid information.")
-                print(request, error)
-    else:
-        form = UserRegistrationForm()
-    return render(request, "blog/register.html", context={"form": form})
+
+    return render(request, "blog/register.html", {
+        "errors": form.errors.values()
+    })
