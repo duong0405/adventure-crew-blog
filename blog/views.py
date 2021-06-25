@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 
 from .form import UserRegistrationForm
 from .models import Post, UserProfile
+from django.contrib import messages
 
 # Create your views here.
 
@@ -48,7 +50,23 @@ def user_profile(request, username):
 
 
 def user_login(request):
-    return render(request, "blog/login.html")
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            auth_user = authenticate(username=username, password=password)
+
+            if auth_user is not None:
+                login(request, auth_user)
+                user_profile = UserProfile.objects.get(user__username=username)
+                return redirect("user-profile", user_profile)
+    else:
+        form = AuthenticationForm()
+
+    return render(request, "blog/login.html", {
+        "errors": form.errors.values()
+    })
 
 
 def user_register(request):
@@ -58,6 +76,8 @@ def user_register(request):
             user = form.save()
             login(request, user)
             return redirect("/")
+    else:
+        form = UserRegistrationForm()
 
     return render(request, "blog/register.html", {
         "errors": form.errors.values()

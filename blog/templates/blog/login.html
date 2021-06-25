@@ -21,16 +21,24 @@
                                              alt="logo">
                                         <h4 class="h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Adventure Crew</h4>
                                     </div>
-                                    <form>
+                                    <form method="POST">
+                                        {% csrf_token %}
                                         <p>Please login to your account</p>
+                                        {% if errors %}<p>Invalid username or password</p>{% endif %}
                                         <div class="form-outline mb-4">
-                                            <input type="email" class="form-control" placeholder="Email address"/>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   name ="username"
+                                                   placeholder="User name"/>
                                         </div>
                                         <div class="form-outline mb-4">
-                                            <input type="password" class="form-control" placeholder="Password" />
+                                            <input type="password"
+                                                   class="form-control"
+                                                   name="password"
+                                                   placeholder="Password"/>
                                         </div>
                                         <div class="d-grid pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
                                         <a class="small text-muted" href="#!">Forgot password?</a>
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">
