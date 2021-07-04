@@ -1,7 +1,7 @@
 {% load static %}
 <!-- Card -->
 <header class="masthead"
-        style=" background-image: url('{% static "blog/images/"|add:user.cover %}'); padding-bottom: 5rem; ">
+        style=" background-image: url('{% static "blog/images/"|add:profile.cover %}'); padding-bottom: 5rem; ">
   <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
@@ -10,27 +10,27 @@
             <div class="card-body p-4">
               <div class="d-flex text-black">
                 <div class="flex-shrink-0">
-                  <img src="{% static "blog/images/"|add:user.avatar %}"
+                  <img src="{% static "blog/images/"|add:profile.avatar %}"
                        alt="Generic placeholder image"
                        class="img-fluid"
                        style="width: 180px; border-radius: 10px"/>
                 </div>
                 <div class="flex-grow-1 ms-3">
-                  <h5 class="mb-1">{{ user }}</h5>
-                  <p class="mb-2 pb-1" style="color: #2b2a2a">{{ user.member }}</p>
+                  <h5 class="mb-1">{{ profile }}</h5>
+                  <p class="mb-2 pb-1" style="color: #2b2a2a">{{ profile.member }}</p>
                   <div class="d-flex justify-content-center rounded-3 p-2 mb-2"
                        style="background-color: #efefef">
                     <div>
                       <p class="small text-muted mb-1 site-heading">Articles</p>
-                      <p class="mb-0">{{ user.articles }}</p>
+                      <p class="mb-0">{{ profile.articles }}</p>
                     </div>
                     <div class="px-3">
                       <p class="small text-muted mb-1">Followers</p>
-                      <p class="mb-0">{{ user.followers }}</p>
+                      <p class="mb-0">{{ profile.followers }}</p>
                     </div>
                     <div>
                       <p class="small text-muted mb-1">Rating</p>
-                      <p class="mb-0">{{ user.rating }}</p>
+                      <p class="mb-0">{{ profile.rating }}</p>
                     </div>
                   </div>
                   <div class="d-flex pt-1">

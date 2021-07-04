@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth import login, authenticate, get_user_model, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 from .form import UserRegistrationForm
@@ -34,7 +34,7 @@ def post_detail(request, slug):
     author = identified_post.author
     return render(request, "blog/post_detail.html", {
         "post": identified_post,
-        "user": author
+        "profile": author
     })
 
 
@@ -42,10 +42,10 @@ def user_profile(request, username):
     users = UserProfile.objects.all()
     for user in users:
         if user.__str__() == username:
-            identified_user = user
+            user_profile = user
 
     return render(request, "blog/user_profile.html", {
-        "user": identified_user
+        "profile": user_profile,
     })
 
 
@@ -82,3 +82,8 @@ def user_register(request):
     return render(request, "blog/register.html", {
         "errors": form.errors.values()
     })
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("/")
