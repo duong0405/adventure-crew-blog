@@ -20,14 +20,14 @@
         </li>
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Welcome, {{ user.get_full_name }}</a>
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Welcome, {{ user.profile.full_name }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url "logout" %}">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link px-lg-3 py-3 py-lg-4"
-               href="{% url "user-profile" user.get_full_name %}">My Profile</a>
+               href="{% url "user-profile" user.profile.full_name %}">My Profile</a>
           </li>
         {% else %}
           <li class="nav-item">

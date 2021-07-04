@@ -7,13 +7,13 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
     avatar = models.CharField(max_length=100)
     cover = models.CharField(max_length=100)
-    member = models.CharField(max_length=30)
-    articles = models.IntegerField()
-    followers = models.IntegerField()
-    rating = models.FloatField()
+    member = models.CharField(max_length=30, default="Junior Member")
+    articles = models.IntegerField(default=0)
+    followers = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
 
     def full_name(self):
         if self.user.first_name == "" or self.user.last_name == "":
