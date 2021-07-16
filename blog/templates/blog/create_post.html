@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/styles.css" %}" />
+{% endblock css_files %}
+{% block title %}
+    {{ profile.full_name }}
+{% endblock title %}
+{% block content %}
+    {% include "blog/partials/navbar.html" %}
+    {% include "blog/partials/card.html" %}
+    <div class="container">
+        <h3>Create new post...</h3>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    {{ post_form.as_p }}
+                    {{ content_form.as_p }}
+                    {{ tag_form.as_p }}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

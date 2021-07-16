@@ -8,8 +8,8 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
-    avatar = models.CharField(max_length=100)
-    cover = models.CharField(max_length=100)
+    avatar = models.ImageField(upload_to="users", null=True, blank=True)
+    cover = models.ImageField(upload_to="users", null=True, blank=True)
     member = models.CharField(max_length=30, default="Junior Member")
     articles = models.IntegerField(default=0)
     followers = models.IntegerField(default=0)
@@ -26,28 +26,28 @@ class UserProfile(models.Model):
 
 
 class Tag(models.Model):
-    caption = models.CharField(max_length=20)
+    tags = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.caption
+        return self.tags
 
 
 class Content(models.Model):
-    heading1 = models.CharField(max_length=200)
+    heading1 = models.CharField(max_length=100)
     paragraph1 = models.TextField(MinLengthValidator(10))
-    img1 = models.CharField(max_length=100)
+    image1 = models.ImageField(upload_to="posts", null=True, blank=True)
 
-    heading2 = models.CharField(max_length=200)
+    heading2 = models.CharField(max_length=100)
     paragraph2 = models.TextField(MinLengthValidator(10))
-    img2 = models.CharField(max_length=100)
+    image2 = models.ImageField(upload_to="posts", null=True, blank=True)
 
-    heading3 = models.CharField(blank=True, max_length=200)
+    heading3 = models.CharField(blank=True, max_length=100)
     paragraph3 = models.TextField(blank=True)
-    img3 = models.CharField(blank=True, max_length=100)
+    image3 = models.ImageField(upload_to="posts", null=True, blank=True)
 
     heading4 = models.CharField(blank=True, max_length=200)
     paragraph4 = models.TextField(blank=True)
-    img4 = models.CharField(blank=True, max_length=100)
+    image4 = models.ImageField(upload_to="posts", null=True, blank=True)
 
 
 class Post(models.Model):
@@ -56,7 +56,7 @@ class Post(models.Model):
         FORMAT_2 = 2
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=200)
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now=True, editable=True)
     slug = models.SlugField(unique=True, db_index=True)
     post_format = models.IntegerField(choices=Format.choices)
     post_preview = models.TextField(MinLengthValidator(
