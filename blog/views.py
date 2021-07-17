@@ -39,20 +39,27 @@ def post_detail(request, slug):
 
 
 def user_profile(request, username):
-
-    print(request.method)
-
     if request.method == "POST":
-        userprofile_form = UserProfileForm(request.POST)
-        print(userprofile_form)
-        userprofile_extendform = UserProfileFormExtend(request.POST)
-        if userprofile_form.is_valid() and userprofile_extendform.is_valid():
+        existing_profile = UserProfile.objects.get(
+            user__username=request.user.username)
+
+        userprofile_form = UserProfileForm(
+            request.POST, instance=existing_profile.user)
+
+        userprofile_extendform = UserProfileFormExtend(
+            request.POST, instance=existing_profile)
+
+        if userprofile_form.is_valid():
             userprofile_form.save()
-            userprofile_extendform.save()
-            print('save success')
         else:
             print(userprofile_form.errors.values())
+
+        if userprofile_extendform.is_valid():
+            userprofile_extendform.save()
+        else:
             print(userprofile_extendform.errors.values())
+
+        return redirect("user-profile", existing_profile)
 
     else:
         userprofile_form = UserProfileForm()
