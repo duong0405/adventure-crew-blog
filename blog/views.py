@@ -47,18 +47,12 @@ def user_profile(request, username):
             request.POST, instance=existing_profile.user)
 
         userprofile_extendform = UserProfileFormExtend(
-            request.POST, instance=existing_profile)
+            request.POST, request.FILES, instance=existing_profile)
 
-        if userprofile_form.is_valid():
+        if userprofile_extendform.is_valid() and userprofile_form.is_valid():
             userprofile_form.save()
-        else:
-            print(userprofile_form.errors.values())
-
-        if userprofile_extendform.is_valid():
             userprofile_extendform.save()
-        else:
-            print(userprofile_extendform.errors.values())
-
+            
         return redirect("user-profile", existing_profile)
 
     else:
