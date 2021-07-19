@@ -39,7 +39,7 @@
                              data-src="holder.js/200x250?theme=thumb"
                              alt="Thumbnail [200x250]"
                              style="width: 200px; height: 250px"
-                             src="{% static "blog/images/"|add:rating.0.content.image1 %}"
+                             src="{{ rating.0.content.image1.url }}"
                              data-holder-rendered="true"/>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                              data-src="holder.js/200x250?theme=thumb"
                              alt="Thumbnail [200x250]"
                              style="width: 200px; height: 250px"
-                             src="{% static "blog/images/"|add:rating.1.content.image1 %}"
+                             src="{{ rating.1.content.image1.url }}"
                              data-holder-rendered="true"/>
                     </div>
                 </div>

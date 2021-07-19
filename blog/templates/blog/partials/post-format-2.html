@@ -1,19 +1,16 @@
-{% load static %}
-<h3 class="pt-2 pb-5">{{ post.heading1 }}</h3>
-<p>{{ post.content1 }}</p>
+
+<h3 class="pt-2 pb-5">{{ post.content.heading1 }}</h3>
+<p>{{ post.content.paragraph1 }}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static
-  "blog/images/"|add:post.content.image1 %}"/>
+  <img class="img-fluid w-100" src="{{ post.content.image1.url }}"/>
 </div>
-<h3 class="pt-2 pb-5">{{ post.heading2 }}</h3>
-<p>{{ post.content2 }}</p>
+<h3 class="pt-2 pb-5">{{ post.content.heading2 }}</h3>
+<p>{{ post.content.paragraph2}}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static
-  "blog/images/"|add:post.content.image2 %}"/>
+  <img class="img-fluid w-100" src="{{ post.content.image2.url }}"/>
 </div>
-<h3 class="pt-5 pb-5">{{ post.heading3 }}</h3>
-<p>{{ post.content3 }}</p>
+<h3 class="pt-5 pb-5">{{ post.content.heading3 }}</h3>
+<p>{{ post.content.paragraph3 }}</p>
 <div class="row pt-5 pb-5">
-  <img class="img-fluid w-100" src="{% static
-  "blog/images/"|add:post.content.image3 %}"/>
+  <img class="img-fluid w-100" src="{{ post.content.image3.url }}"/>
 </div>
