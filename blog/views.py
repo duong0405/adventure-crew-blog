@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, get_user_model, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, TagForm, PostForm, ContentForm
+from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, PostForm, ContentForm
 from .models import Post, UserProfile
-from django.contrib import messages
+from django.utils.text import slugify
 
 # Create your views here.
 
@@ -116,35 +116,27 @@ def user_logout(request):
     logout(request)
     return redirect("/")
 
-
-def edit_profile(request):
-    if request.method == "POST":
-        form = UserProfileForm(request.POST)
-        print(form.cleaned_data)
-    else:
-        form = UserProfileForm()
-
-    return render(request, "blog/user_profile.html", {
-        "form": form,
-    })
-
-
 def create_post(request, username):
 
     if request.method == "POST":
         post_form = PostForm(request.POST)
-        content_form = ContentForm(request.POST)
-        tag_form = TagForm(request.POST)
+        content_form = ContentForm(request.POST, request.FILES)
 
         if post_form.is_valid() and content_form.is_valid():
-            post_form.save()
-            content_form.save()
-        if tag_form.is_valid():
-            tag_form.save()
+            content = content_form.save()
+            post = post_form.save(commit=False)  
+            post.content = content
+            post.slug = slugify(post.title)
+            
+            author = UserProfile.objects.get(user__username=request.user.username)
+            post.author = author
+            post.save()
+            post_form.save_m2m()
+        return redirect("user-profile", author)
+        
     else:
         post_form = PostForm()
         content_form = ContentForm()
-        tag_form = TagForm()
 
     identified_user = UserProfile.objects.get(
         user__username=request.user.username)
@@ -152,6 +144,5 @@ def create_post(request, username):
     return render(request, "blog/create_post.html", {
         "profile": identified_user,
         "post_form": post_form,
-        "content_form": content_form,
-        "tag_form": tag_form
+        "content_form": content_form
     })

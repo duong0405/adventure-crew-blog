@@ -26,10 +26,10 @@ class UserProfile(models.Model):
 
 
 class Tag(models.Model):
-    tags = models.CharField(max_length=20)
+    caption = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.tags
+        return self.caption
 
 
 class Content(models.Model):

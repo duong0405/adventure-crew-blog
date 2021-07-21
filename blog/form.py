@@ -40,11 +40,10 @@ class UserProfileFormExtend(forms.ModelForm):
         model = UserProfile
         fields = ("avatar", "cover")
 
-
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "excerpt", "post_format", "post_preview")
+        fields = ("title", "excerpt", "post_format", "post_preview", "tags")
         labels = {
             "title": "Title",
             "excerpt": "Excerpt",
@@ -52,19 +51,11 @@ class PostForm(forms.ModelForm):
             "post_preview": "Post Preview"
         }
         widgets = {
-            'title': forms.Textarea(attrs={'class': 'form-control'}),
-            'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
-            'post_format': forms.Select(attrs={'class': 'form-control'}),
-            'post_preview': forms.Textarea(attrs={'class': 'form-control'})
-        }
-
-
-class TagForm(forms.ModelForm):
-    class Meta:
-        model = Tag
-        fields = ("tags",)
-        widgets = {
-            'tags': forms.TextInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'excerpt': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'post_format': forms.Select(attrs={'class': 'bootstrap-select'}),
+            'post_preview': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
+            'tags': forms.CheckboxSelectMultiple()
         }
 
 
@@ -86,15 +77,15 @@ class ContentForm(forms.ModelForm):
         }
 
         widgets = {
-            'heading1': forms.TextInput(attrs={'class': 'form-control'}),
-            'paragraph1': forms.Textarea(attrs={'class': 'form-control'}),
+            'heading1': forms.TextInput(attrs={ 'class': 'form-control'}),
+            'paragraph1': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
 
             'heading2': forms.TextInput(attrs={'class': 'form-control'}),
-            'paragraph2': forms.Textarea(attrs={'class': 'form-control'}),
+            'paragraph2': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
 
             'heading3': forms.TextInput(attrs={'class': 'form-control'}),
-            'paragraph3': forms.Textarea(attrs={'class': 'form-control'}),
+            'paragraph3': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
 
             'heading4': forms.TextInput(attrs={'class': 'form-control'}),
-            'paragraph4': forms.Textarea(attrs={'class': 'form-control'}),
+            'paragraph4': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
         }
