@@ -13,18 +13,18 @@
     <ul class="post-meta mb-2">
       <li>
         {% for tag in posts.0.tags.values  %}
-          <a class="text-dark" href="#!">{{tag.caption}}</a>
+          <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{tag.caption}}</a>
         {% endfor %}
       </li>
     </ul>
     <h2>
-      <a class="text-dark" href="#">{{posts.0.title}}</a>
+      <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{posts.0.title}}</a>
     </h2>
     <p class="card-text">
       {{posts.0.excerpt}}
     </p>
     <div class="content">
-      <a class="btn btn-light" href="#">Read More</a>
+      <a class="btn btn-light" href="{% url "post-detail-page" posts.0.slug %}">Read More</a>
     </div>
   </div>
 </article>
