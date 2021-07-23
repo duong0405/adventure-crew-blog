@@ -15,10 +15,9 @@
                 <h3 class="pb-3 mb-4 font-italic border-bottom">Lastest Articles</h3>
                 <div class="row">
                     <div class="col-12 mb-4">{% include "blog/partials/userpost1.html" %}</div>
-                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
-                    <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
+                    {% for post in posts|slice:"1:5" %}
+                        <div class="col-md-6 mb-4">{% include "blog/partials/userpost2.html" %}</div>
+                    {% endfor %}
                 </div>
                 <!-- /.blog-post -->
                 <nav class="blog-pagination pb-5">

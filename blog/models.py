@@ -49,6 +49,9 @@ class Content(models.Model):
     paragraph4 = models.TextField(blank=True)
     image4 = models.ImageField(upload_to="posts", null=True, blank=True)
 
+    def __str__(self):
+        return self.heading1
+
 
 class Post(models.Model):
     class Format(models.IntegerChoices):
@@ -56,7 +59,7 @@ class Post(models.Model):
         FORMAT_2 = 2
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=200)
-    date = models.DateField(auto_now=True, editable=True)
+    date = models.DateField()
     slug = models.SlugField(unique=True, db_index=True)
     post_format = models.IntegerField(choices=Format.choices)
     post_preview = models.TextField(MinLengthValidator(

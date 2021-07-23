@@ -1,30 +1,27 @@
-{% load static %}
 <article class="card article-card">
   <a href="article.html">
     <div class="card-image">
       <div class="post-info">
-        <span class="text-uppercase">04 Jun 2021</span>
+        <span class="text-uppercase">{{posts.0.date | date:"M j Y"}}</span>
         <span class="text-uppercase">3 minutes read</span>
       </div>
-      <img loading="lazy"
-           decoding="async"
-           src="https://demo.themefisher.com/reporter/images/post/post-1.jpg"
-           alt="Post Thumbnail"
+      <img src="{{posts.0.content.image2.url}}"
            class="w-100"/>
     </div>
   </a>
   <div class="card-body px-0 pb-1">
     <ul class="post-meta mb-2">
       <li>
-        <a href="#!">travel</a>
-        <a href="#!">news</a>
+        {% for tag in posts.0.tags.values  %}
+          <a class="text-dark" href="#!">{{tag.caption}}</a>
+        {% endfor %}
       </li>
     </ul>
     <h2>
-      <a class="text-dark" href="#">Is it Ethical to Travel Now? With that Freedom Comes Responsibility.</a>
+      <a class="text-dark" href="#">{{posts.0.title}}</a>
     </h2>
     <p class="card-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      {{posts.0.excerpt}}
     </p>
     <div class="content">
       <a class="btn btn-light" href="#">Read More</a>

@@ -70,10 +70,13 @@ def user_profile(request, username):
             'email': request.user.email
         })
 
+    posts = Post.objects.filter(author=user_profile)
+
     return render(request, "blog/user_profile.html", {
         "profile": user_profile,
         "userprofile_form": userprofile_form,
-        "userprofile_extendform": userprofile_extendform
+        "userprofile_extendform": userprofile_extendform,
+        "posts": posts
     })
 
 
