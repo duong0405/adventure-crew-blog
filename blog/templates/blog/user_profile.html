@@ -30,39 +30,11 @@
                 <div class="p-3 mb-3 bg-light rounded">
                     <h4 class="font-italic">Categories</h4>
                     <ul class="widget-list">
-                        <li>
-                            <a href="#!">computer<span class="ml-auto">(3)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">cruises<span class="ml-auto">(2)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">destination<span class="ml-auto">(1)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">internet<span class="ml-auto">(4)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">lifestyle<span class="ml-auto">(2)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">news<span class="ml-auto">(5)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">telephone<span class="ml-auto">(1)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">tips<span class="ml-auto">(1)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">travel<span class="ml-auto">(3)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">website<span class="ml-auto">(4)</span></a>
-                        </li>
-                        <li>
-                            <a href="#!">hugo<span class="ml-auto">(2)</span></a>
-                        </li>
+                        {% for key, value in tags.items  %}
+                            <li>
+                                <a href="#!">{{ key }}<span class="ml-5">({{ value }})</span></a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </aside>

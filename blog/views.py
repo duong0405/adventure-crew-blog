@@ -19,13 +19,17 @@ def starting_page(request):
 
     # Render tags
     tags = []
+    unique_list = []
     for post in lastest_posts:
         tags += post.tags.all()
+    for x in tags:
+        if x not in unique_list:
+            unique_list.append(x)
 
     return render(request, "blog/index.html", {
         "posts": lastest_posts,
         "rating": rating_posts,
-        "tags": tags
+        "tags": unique_list
     })
 
 
@@ -52,7 +56,7 @@ def user_profile(request, username):
         if userprofile_extendform.is_valid() and userprofile_form.is_valid():
             userprofile_form.save()
             userprofile_extendform.save()
-        
+
         return redirect("user-profile", existing_profile)
 
     else:
@@ -72,11 +76,21 @@ def user_profile(request, username):
 
     posts = Post.objects.filter(author=user_profile)
 
+    list_tags = []
+    tags = {}
+    for post in posts:
+        list_tags += post.tags.all()
+    for i in list_tags:
+        tags[i] = list_tags.count(i)
+
+    print(tags.keys())
+
     return render(request, "blog/user_profile.html", {
         "profile": user_profile,
         "userprofile_form": userprofile_form,
         "userprofile_extendform": userprofile_extendform,
-        "posts": posts
+        "posts": posts,
+        "tags": tags
     })
 
 
@@ -119,6 +133,7 @@ def user_logout(request):
     logout(request)
     return redirect("/")
 
+
 def create_post(request, username):
 
     if request.method == "POST":
@@ -127,16 +142,17 @@ def create_post(request, username):
 
         if post_form.is_valid() and content_form.is_valid():
             content = content_form.save()
-            post = post_form.save(commit=False)  
+            post = post_form.save(commit=False)
             post.content = content
             post.slug = slugify(post.title)
-            
-            author = UserProfile.objects.get(user__username=request.user.username)
+
+            author = UserProfile.objects.get(
+                user__username=request.user.username)
             post.author = author
             post.save()
             post_form.save_m2m()
         return redirect("user-profile", author)
-        
+
     else:
         post_form = PostForm()
         content_form = ContentForm()
