@@ -1,30 +1,34 @@
-<article class="card article-card">
-  <a href="article.html">
-    <div class="card-image">
-      <div class="post-info">
-        <span class="text-uppercase">{{posts.0.date | date:"M j Y"}}</span>
-        <span class="text-uppercase">3 minutes read</span>
+{% if posts %}
+  <article class="card article-card">
+    <a href="article.html">
+      <div class="card-image">
+        <div class="post-info">
+          <span class="text-uppercase">{{ posts.0.date | date:"M j Y" }}</span>
+          <span class="text-uppercase">3 minutes read</span>
+        </div>
+        <img src="{{ posts.0.content.image2.url }}" class="w-100"/>
       </div>
-      <img src="{{posts.0.content.image2.url}}"
-           class="w-100"/>
+    </a>
+    <div class="card-body px-0 pb-1">
+      <ul class="post-meta mb-2">
+        <li>
+          {% for tag in posts.0.tags.values  %}
+            <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{ tag.caption }}</a>
+          {% endfor %}
+        </li>
+      </ul>
+      <h2>
+        <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{ posts.0.title }}</a>
+      </h2>
+      <p class="card-text">{{ posts.0.excerpt }}</p>
+      <div class="content">
+        <a class="btn btn-light"
+           href="{% url "post-detail-page" posts.0.slug %}">Read More</a>
+      </div>
     </div>
-  </a>
-  <div class="card-body px-0 pb-1">
-    <ul class="post-meta mb-2">
-      <li>
-        {% for tag in posts.0.tags.values  %}
-          <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{tag.caption}}</a>
-        {% endfor %}
-      </li>
-    </ul>
-    <h2>
-      <a class="text-dark" href="{% url "post-detail-page" posts.0.slug %}">{{posts.0.title}}</a>
-    </h2>
-    <p class="card-text">
-      {{posts.0.excerpt}}
-    </p>
-    <div class="content">
-      <a class="btn btn-light" href="{% url "post-detail-page" posts.0.slug %}">Read More</a>
-    </div>
-  </div>
-</article>
+  </article>
+{% else %}
+  <h2>
+    You have no post! <a href="{% url "create-post" user.profile.full_name %}">Create new post here.</a>
+  </h2>
+{% endif %}

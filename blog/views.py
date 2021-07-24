@@ -52,7 +52,7 @@ def user_profile(request, username):
         if userprofile_extendform.is_valid() and userprofile_form.is_valid():
             userprofile_form.save()
             userprofile_extendform.save()
-            
+        
         return redirect("user-profile", existing_profile)
 
     else:
