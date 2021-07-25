@@ -4,34 +4,28 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, PostForm, ContentForm
 from .models import Post, UserProfile
+from . import models
 from django.utils.text import slugify
+from django.views.generic import TemplateView
+
 
 # Create your views here.
+class StartingPageView(TemplateView):
+    template_name = "blog/index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lastest_posts = models.Post.objects.all().order_by("-date")[:3]
+        context["posts"] = lastest_posts
 
-def starting_page(request):
+        rating_posts = models.Post.objects.all().order_by("-rating")[:2]
+        context["rating"] = rating_posts
 
-    # Render 3 latest posts on starting page
-    lastest_posts = Post.objects.all().order_by("-date")[:3]
+        tags = models.Tag.objects.all()
+        context["tags"] = tags
 
-    # Render 2 rating posts on starting page
-    rating_posts = Post.objects.all().order_by("-rating")[:2]
-
-    # Render tags
-    tags = []
-    unique_list = []
-    for post in lastest_posts:
-        tags += post.tags.all()
-    for x in tags:
-        if x not in unique_list:
-            unique_list.append(x)
-
-    return render(request, "blog/index.html", {
-        "posts": lastest_posts,
-        "rating": rating_posts,
-        "tags": unique_list
-    })
-
+        return context
+    
 
 def post_detail(request, slug):
     identified_post = get_object_or_404(Post, slug=slug)
