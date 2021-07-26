@@ -8,8 +8,8 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
-    avatar = models.ImageField(upload_to="users", null=True, blank=True)
-    cover = models.ImageField(upload_to="users", null=True, blank=True)
+    avatar = models.ImageField(upload_to="users", default='users/avatar-default.jpg', null=True, blank=True)
+    cover = models.ImageField(upload_to="users", default='users/cover-default.jpg', null=True, blank=True)
     member = models.CharField(max_length=30, default="Junior Member")
     articles = models.IntegerField(default=0)
     followers = models.IntegerField(default=0)
