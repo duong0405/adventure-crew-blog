@@ -6,7 +6,8 @@ from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, 
 from .models import Post, UserProfile
 from . import models
 from django.utils.text import slugify
-from django.views.generic import TemplateView
+from django.views.generic import View, TemplateView
+from django.views.generic.edit import FormView
 
 
 # Create your views here.
@@ -87,9 +88,12 @@ def user_profile(request, username):
         "tags": tags
     })
 
+class UserLoginView(View):
+    def get(self, request):
+        form = AuthenticationForm()
+        return render(request, "blog/login.html")
 
-def user_login(request):
-    if request.method == "POST":
+    def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -100,33 +104,29 @@ def user_login(request):
                 login(request, auth_user)
                 user_profile = UserProfile.objects.get(user__username=username)
                 return redirect("user-profile", user_profile)
-    else:
-        form = AuthenticationForm()
+        return render(request, "blog/login.html", {
+            "errors": form.errors.values()
+        })
 
-    return render(request, "blog/login.html", {
-        "errors": form.errors.values()
-    })
-
-
-def user_register(request):
-    if request.method == "POST":
+class UserRegisterView(View):
+    def get(self, request):
+        form = UserRegistrationForm()
+        return render(request, "blog/register.html")
+    
+    def post(self, request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("/")
-    else:
-        form = UserRegistrationForm()
-
-    return render(request, "blog/register.html", {
-        "errors": form.errors.values()
-    })
-
-
-def user_logout(request):
-    logout(request)
-    return redirect("/")
-
+        return render(request, "blog/register.html", {
+         "errors": form.errors.values()
+     })
+    
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect("/")
 
 def create_post(request, username):
 
