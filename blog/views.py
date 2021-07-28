@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, authenticate, get_user_model, logout
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, PostForm, ContentForm
-from .models import Post, UserProfile
-from . import models
+from .models import Post, UserProfile, Tag
 from django.utils.text import slugify
-from django.views.generic import View, TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic import View, TemplateView, DetailView
 
 
 # Create your views here.
@@ -16,77 +14,77 @@ class StartingPageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        lastest_posts = models.Post.objects.all().order_by("-date")[:3]
+        lastest_posts = Post.objects.all().order_by("-date")[:3]
         context["posts"] = lastest_posts
 
-        rating_posts = models.Post.objects.all().order_by("-rating")[:2]
+        rating_posts = Post.objects.all().order_by("-rating")[:2]
         context["rating"] = rating_posts
 
-        tags = models.Tag.objects.all()
+        tags = Tag.objects.all()
         context["tags"] = tags
 
         return context
     
+class PostDetailView(DetailView):
+    template_name = "blog/post_detail.html"
+    model = Post
+    context_object_name = "post"
 
-def post_detail(request, slug):
-    identified_post = get_object_or_404(Post, slug=slug)
-    author = identified_post.author
-    return render(request, "blog/post_detail.html", {
-        "post": identified_post,
-        "profile": author
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["profile"] = self.object.author
+        return context
+    
+class UserProfileView(View):
 
+    def get_user_profile(self, username):
+        users = UserProfile.objects.all()
+        for user in users:
+            if user.__str__() == username:
+                return user
+        return None
+    
+    def get_user_tags(self, posts):
+        list_tags = []
+        tags = {}
+        for post in posts:
+            list_tags += post.tags.all()
+        for i in list_tags:
+            tags[i] = list_tags.count(i)
+        return tags
 
-def user_profile(request, username):
-    if request.method == "POST":
-        existing_profile = UserProfile.objects.get(
-            user__username=request.user.username)
+    def get(self, request, username):
+        userprofile_form = UserProfileForm()
+        userprofile_extendform = UserProfileFormExtend()
 
-        userprofile_form = UserProfileForm(
-            request.POST, instance=existing_profile.user)
+        user_profile = self.get_user_profile(username)
+        if request.user.is_authenticated:
+            userprofile_form = UserProfileForm(initial={
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'email': request.user.email
+            })
 
+        posts = Post.objects.filter(author=user_profile)
+        tags = self.get_user_tags(posts)
+        return render(request, "blog/user_profile.html", {
+            "profile": user_profile,
+            "userprofile_form": userprofile_form,
+            "userprofile_extendform": userprofile_extendform,
+            "posts": posts,
+            "tags": tags
+        })
+
+    def post(self, request):
+        existing_profile = UserProfile.objects.get(user__username=request.user.username)
+        userprofile_form = UserProfileForm(request.POST, instance=existing_profile.user)
         userprofile_extendform = UserProfileFormExtend(
             request.POST, request.FILES, instance=existing_profile)
 
         if userprofile_extendform.is_valid() and userprofile_form.is_valid():
             userprofile_form.save()
             userprofile_extendform.save()
-
         return redirect("user-profile", existing_profile)
-
-    else:
-        userprofile_form = UserProfileForm()
-        userprofile_extendform = UserProfileFormExtend()
-
-    users = UserProfile.objects.all()
-    for user in users:
-        if user.__str__() == username:
-            user_profile = user
-    if request.user.is_authenticated:
-        userprofile_form = UserProfileForm(initial={
-            'first_name': request.user.first_name,
-            'last_name': request.user.last_name,
-            'email': request.user.email
-        })
-
-    posts = Post.objects.filter(author=user_profile)
-
-    list_tags = []
-    tags = {}
-    for post in posts:
-        list_tags += post.tags.all()
-    for i in list_tags:
-        tags[i] = list_tags.count(i)
-
-    print(tags.keys())
-
-    return render(request, "blog/user_profile.html", {
-        "profile": user_profile,
-        "userprofile_form": userprofile_form,
-        "userprofile_extendform": userprofile_extendform,
-        "posts": posts,
-        "tags": tags
-    })
 
 class UserLoginView(View):
     def get(self, request):
@@ -128,9 +126,19 @@ class UserLogoutView(View):
         logout(request)
         return redirect("/")
 
-def create_post(request, username):
+class CreatePostView(View):
+    def get(self, request, username):
+        post_form = PostForm()
+        content_form = ContentForm()
+        identified_user = UserProfile.objects.get(user__username=request.user.username)
 
-    if request.method == "POST":
+        return render(request, "blog/create_post.html", {
+            "profile": identified_user,
+            "post_form": post_form,
+            "content_form": content_form
+        })
+    
+    def post(self, request):
         post_form = PostForm(request.POST)
         content_form = ContentForm(request.POST, request.FILES)
 
@@ -145,17 +153,10 @@ def create_post(request, username):
             post.author = author
             post.save()
             post_form.save_m2m()
-        return redirect("user-profile", author)
+            return redirect("user-profile", author)
 
-    else:
-        post_form = PostForm()
-        content_form = ContentForm()
-
-    identified_user = UserProfile.objects.get(
-        user__username=request.user.username)
-
-    return render(request, "blog/create_post.html", {
-        "profile": identified_user,
-        "post_form": post_form,
-        "content_form": content_form
-    })
+        return render(request, "blog/create_post.html", {
+            "profile": identified_user,
+            "post_form": post_form,
+            "content_form": content_form
+        })
