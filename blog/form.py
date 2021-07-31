@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import UserProfile, Post, Tag, Content
+from .models import UserProfile, Post, Tag, Content, Comment
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -88,4 +88,21 @@ class ContentForm(forms.ModelForm):
 
             'heading4': forms.TextInput(attrs={'class': 'form-control'}),
             'paragraph4': forms.Textarea(attrs={'rows': 5,'class': 'form-control'}),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ["post"]
+
+        labels = {
+            "user_name": "Name",
+            "user_email": "Email",
+            "text": "Message"
+        }
+
+        widgets = {
+            'user_name': forms.TextInput(attrs={ 'class': 'form-control'}),
+            'user_email': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'cols':20,'rows': 10,'class': 'form-control'})
         }

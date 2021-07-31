@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
-from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, PostForm, ContentForm
+from .form import UserRegistrationForm, UserProfileForm, UserProfileFormExtend, PostForm, ContentForm, CommentForm
 from .models import Post, UserProfile, Tag
 from django.utils.text import slugify
 from django.views.generic import View, TemplateView, DetailView
@@ -25,15 +25,31 @@ class StartingPageView(TemplateView):
 
         return context
     
-class PostDetailView(DetailView):
-    template_name = "blog/post_detail.html"
-    model = Post
-    context_object_name = "post"
+class PostDetailView(View):
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        profile = post.author
+        return render(request, "blog/post_detail.html", {
+            "post": post,
+            "profile": profile, 
+            "comment_form": CommentForm()
+        })
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["profile"] = self.object.author
-        return context
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect("post-detail-page", slug)
+
+        return render(request, "blog/post_detail.html", {
+            "post": post,
+            "profile": profile, 
+            "comment_form": comment_form
+        })
+
     
 class UserProfileView(View):
 
